@@ -13,18 +13,18 @@ async function main() {
 
 
   const MyGovernor = await ethers.getContractFactory("MyGovernor");
-  const governor = await MyGovernor.deploy("0x19E059c9B1751aCeDd246f4212DF9fbb922FcE49");
+  const governor = await MyGovernor.deploy(futureAddress);
 
   const MyToken = await ethers.getContractFactory("MyToken");
   const token = await MyToken.deploy(governor.address);
 
-  await token.delegate(governor.address);
-  const balance = await token.balanceOf(governor.address);
+  await token.delegate(owner.address);
+  const balance = await token.balanceOf(owner.address);
 
   console.log(
     `Governor deployed to ${governor.address}`,
     `Token deployed to ${token.address}`,
-    `${governor.address} balance: ${balance.toString()}`
+    `${owner.address} balance: ${balance.toString()}`
   );
 }
 
